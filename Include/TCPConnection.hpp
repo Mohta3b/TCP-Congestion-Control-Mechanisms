@@ -1,8 +1,8 @@
-#ifndef __TCPConnection_H__
-#define __TCPConnection_H__
+#ifndef __TCPCONNECTION_H__
+#define __TCPCONNECTION_H__
 
 class TCPConnection {
-    private:
+    protected:
         int cwnd;
         long ssthresh;
         long rtt;
@@ -14,11 +14,9 @@ class TCPConnection {
         long getSsthresh();
         long getRtt();
         void SendData();
-        void onPacketLoss();
         void onRTTUpdate(long new_rtt);
-        void onSelectiveAck(); // for New Reno
 };
 
 
 
-#endif /* __TCPConnection_H__ */
+#endif /* __TCPCONNECTION_H__ */

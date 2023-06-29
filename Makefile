@@ -9,12 +9,18 @@ EXECUTABLE_FILE = simulation.out
 
 OBJECTS = \
 	$(BUILD_DIR)/Simulation.o \
-	$(BUILD_DIR)/TCPConnection.o
+	$(BUILD_DIR)/TCPConnection.o \
+	$(BUILD_DIR)/Reno.o \
+	$(BUILD_DIR)/NewReno.o \
+	$(BUILD_DIR)/BBR.o
 	
 
 MainSensitivityList = \
 	$(SRC_DIR)/Simulation.cpp \
 	$(INCLUDE_DIR)/TCPConnection.hpp \
+	$(INCLUDE_DIR)/Reno.hpp \
+	$(INCLUDE_DIR)/NewReno.hpp \
+	$(INCLUDE_DIR)/BBR.hpp
 
 
 all: $(BUILD_DIR) $(EXECUTABLE_FILE)
@@ -28,8 +34,14 @@ $(BUILD_DIR)/Simulation.o: $(MainSensitivityList)
 $(BUILD_DIR)/TCPConnection.o: $(NetworkSensitivityList)
 	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/TCPConnection.cpp -o $(BUILD_DIR)/TCPConnection.o
 
-# $(BUILD_DIR)/Graph.o: $(GraphSensitivityList)
-# 	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/Graph.cpp -o $(BUILD_DIR)/Graph.o
+$(BUILD_DIR)/Reno.o: $(GraphSensitivityList)
+	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/Reno.cpp -o $(BUILD_DIR)/Reno.o
+
+$(BUILD_DIR)/NewReno.o: $(GraphSensitivityList)
+$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/NewReno.cpp -o $(BUILD_DIR)/NewReno.o
+
+$(BUILD_DIR)/BBR.o: $(GraphSensitivityList)
+	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/BBR.cpp -o $(BUILD_DIR)/BBR.o
 
 $(EXECUTABLE_FILE): $(OBJECTS)
 	$(CC) $(CFLAGS) $(LINK_FLAGS) $(OBJECTS) -o $(EXECUTABLE_FILE)

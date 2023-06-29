@@ -1,38 +1,40 @@
+#include <iostream>
 #include "./TCPConnection.hpp"
 
-TCPConnection::TCPConnection() {
+TCPConnection::TCPConnection()
+{
     cwnd = 1;
     ssthresh = 65535;
     rtt = 0;
 }
 
-TCPConnection::~TCPConnection() {
+TCPConnection::~TCPConnection()
+{
 }
 
-int TCPConnection::getCwnd() {
+int TCPConnection::getCwnd()
+{
     return cwnd;
 }
 
-long TCPConnection::getSsthresh() {
+long TCPConnection::getSsthresh()
+{
     return ssthresh;
 }
 
-long TCPConnection::getRtt() {
+long TCPConnection::getRtt()
+{
     return rtt;
 }
 
-void TCPConnection::SendData() {
-    // TODO
+void TCPConnection::SendData()
+{
+    int sending_rate = getCwnd() ? (getCwnd() < getSsthresh()) : getSsthresh();
+    for (int i = 0; i < sending_rate; i++)
+    {
+        std::cout << "Sending packet " << i << std::endl;
+    }
+    std::cout << "Sending rate: " << sending_rate << std::endl;
 }
 
-void TCPConnection::onPacketLoss() {
-    // TODO
-}
 
-void TCPConnection::onRTTUpdate(long new_rtt) {
-    // TODO
-}
-
-void TCPConnection::onSelectiveAck() {
-    // TODO
-}
