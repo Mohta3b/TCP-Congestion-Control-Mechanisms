@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../include/Reno.hpp"
 
 Reno::Reno()
@@ -12,25 +13,28 @@ Reno::~Reno()
 
 void Reno::onPacketLoss()
 {
-    // TODO: not correct
     switch (this->controll_mode)
     {
     case Mode::SLOW_START:
         this->ssthresh = this->cwnd / 2;
         this->cwnd = 1;
         this->controll_mode = Mode::SLOW_START;
+        std::cout << "Slow start mechanism activated!" << std::endl;
+        this->printInfo();
         break;
     case Mode::CONGESTION_AVOIDANCE:
-        this->ssthresh = this->cwnd / 2;
-        this->cwnd = 1;
-        this->controll_mode = Mode::SLOW_START;
+        this->controll_mode = Mode::FAST_RECOVERY;
+        std::cout << "Fast recovery mechanism activated!" << std::endl;
+        this->printInfo();
+        this->onPacketLoss();
         break;
     case Mode::FAST_RECOVERY:
-        this->ssthresh = this->cwnd / 2;
-        this->cwnd = 1;
+        this->cwnd /= 2;
+        this->ssthresh = this->cwnd;
         this->controll_mode = Mode::SLOW_START;
+        std::cout << "Slow start mechanism activated!" << std::endl;
+        this->printInfo();
         break;
-        
     }
 }
 
@@ -56,6 +60,13 @@ void Reno::onRTTUpdate(long new_rtt)
 void Reno::slowStart()
 {
     this->cwnd *= 2;
+    if (this->cwnd >= this->ssthresh)
+    {
+        this->controll_mode = Mode::CONGESTION_AVOIDANCE;
+        this->cwnd = this->ssthresh;
+        std::cout << "Congestion avoidance mechanism activated!" << std::endl;
+        this->printInfo();
+    }
 }
 
 void Reno::congestionAvoidance()
