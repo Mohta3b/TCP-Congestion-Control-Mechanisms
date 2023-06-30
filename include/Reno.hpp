@@ -12,7 +12,7 @@ class Reno : public TCPConnection {
         Reno();
         ~Reno();
         void onPacketLoss();
-        void onRTTUpdate(long new_rtt = -1);
+        void onRTTUpdate(long new_rtt);
         void slowStart();
         void congestionAvoidance();
         void fastRecovery();

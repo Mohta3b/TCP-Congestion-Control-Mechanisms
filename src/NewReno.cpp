@@ -13,6 +13,10 @@ NewReno::~NewReno()
 
 void NewReno::onSelectiveAck(int num_of_acks)
 {
+    if (this->cwnd < num_of_acks) 
+    {
+        this->ssthresh = this->cwnd/2;
+    }
     switch(this->controll_mode)
     {
         case Mode::SLOW_START:

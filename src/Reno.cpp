@@ -60,6 +60,7 @@ void Reno::onRTTUpdate(long new_rtt)
 void Reno::slowStart()
 {
     this->cwnd *= 2;
+    std::cout << "cwnd in slow start: " << this->cwnd << std::endl;
     if (this->cwnd >= this->ssthresh)
     {
         this->controll_mode = Mode::CONGESTION_AVOIDANCE;
@@ -77,5 +78,5 @@ void Reno::congestionAvoidance()
 void Reno::fastRecovery()
 {
     this->cwnd /= 2;
-    this->cwnd = this->ssthresh;
+    this->ssthresh = this->cwnd;
 }
