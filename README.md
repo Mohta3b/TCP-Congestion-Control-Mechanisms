@@ -47,6 +47,12 @@ Fast Recovery: In the event of packet loss, TCP Reno quickly recovers by reducin
 
 
 
+![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/05965545-104f-406f-8f95-d05d65643dfd)
+![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/58f950e5-3b39-4333-84a0-78ea7a733809)
+![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/8692b23f-9005-4f3d-a815-33e32a30c777)
+![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/2712b363-b3b6-4ab0-ad88-9bcaff399a69)
+![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/9da511e1-9451-4bc6-b574-c59c0033c490)
+
 
 
 ### How to use?
