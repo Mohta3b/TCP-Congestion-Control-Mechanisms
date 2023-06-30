@@ -1,116 +1,59 @@
-# CN_CHomeworks4
+# Congestion Controll Algorithms
 
-- [Commands](#commands)
-    - [Topology](#topology)
-        - [Setup Topology](#setup-topology)
-        - [Modify Cost](#modify-cost) 
-        - [Remove Link](#remove-link)
-        - [Show Topology](#show-topology) 
-    - [Protocols](#protocols)
-        - [Border Gateway(BGP)](#border-gateway)
-        - [Link State Routing(LSR)](#link-state)
-        - [Distance Vector Routing(DVR)](#distance-vector)
+
+- [Protocol](#protocol)
+    - [TCP Reno](#tcp-reno)
+        - [Description](#description)
+        - [Test Results](#test-results) 
+    - [TCP New Reno](#tcp-new-reno)
+        - [Description](#description)
+        - [Test Results](#test-results)
+    - [BBR](#bbr)
+        - [Description](#description)
+        - [Test Results](#test-results)
     
 - [How to use?](#how-to-use)
 
 
-## Commands
+## Protocol
 
-### Topology
-By running the following commands, you can setup a topology, modify the cost of a link, remove a link, and show the topology.
+### TCP Reno
+#### Description
+TCP Reno is a widely used congestion control algorithm for the Transmission Control Protocol (TCP), which is the standard communication protocol used on the Internet. It is designed to manage network congestion and ensure reliable and efficient data transmission.
 
-#### Setup Topology
-```topology``` command is used to setup a topology. It takes source node, destination node, and cost as arguments. 
-```text
-topology <s1>-<d1>-<c1> <s2>-<d2>-<c2> ...
-```
-If setup is successful, it will print `Done!` message.
+TCP Reno operates by using a combination of packet loss and acknowledgment (ACK) information to adjust the sending rate of data. It employs a mechanism known as "Additive Increase, Multiplicative Decrease" (AIMD) to regulate the flow of data. Initially, TCP Reno increases its sending rate linearly until it detects packet loss or congestion through the absence of ACKs. When packet loss occurs, it interprets it as a sign of network congestion and reduces its sending rate by halving the congestion window size. This reduction prevents further congestion and allows the network to recover.
 
-Sample output:
+Upon successful transmission and reception of packets, TCP Reno gradually increases its sending rate, adding a fixed amount to the congestion window for every ACK received. This incremental increase allows TCP Reno to probe the network for available bandwidth and maximize its utilization while avoiding congestion.
+
+TCP Reno's adaptive nature and conservative approach make it a robust congestion control algorithm suitable for various network conditions and congestion scenarios. It has been widely deployed and forms the basis for many TCP implementations used today.
+
+In summary, TCP Reno is a congestion control algorithm for TCP that aims to maintain efficient and reliable data transmission by dynamically adjusting the sending rate based on network conditions. Its additive increase and multiplicative decrease mechanisms help prevent congestion and optimize network performance.
+
+#### Test Results
+Start (Slow Start): TCP Reno's slow start is an initial phase where the sender gradually increases its transmission rate, probing the network for available bandwidth.
 <p align="center">
-<img src="https://github.com/Mohta3b/CN_CHomeworks_3/assets/86144768/dcca7a97-2e4b-4fae-8110-b974acb97a74">
+<img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/c5671dbe-2442-4a70-b499-398aaaf79e77">
 </p>
 
-#### Modify Cost
-```modify``` command is used to modify the cost of a link. It takes source node, destination node, and cost as arguments. If there is no link between source and destination, a new link will be created. 
-```text
-modify <s>-<d>-<c>
-```
-***Note:*** Source node and destination node can NOT be identical. 
-
-Sample output:
+Congestion Avoidance: TCP Reno uses additive increase to gradually raise the sending rate, allowing for optimal bandwidth utilization while avoiding network congestion.
 <p align="center">
-<img src="https://github.com/Mohta3b/CN_CHomeworks_3/assets/86144768/ccc637ab-f7a3-4770-a20d-70c7b5012a16">
+<img src="https://github.com/Mohta3b/CN_CHomeworks_3/assets/86144768/07aa5ec7-eeab-4f72-bd21-94a50a7d4757">
 </p>
 
-#### Remove Link
-```remove``` command is used to remove a link. It takes source node and destination node as arguments. 
-```text
-remove <s>-<d>
-```
-
-Sample output:
+Fast Recovery: In the event of packet loss, TCP Reno quickly recovers by reducing the congestion window and retransmitting lost packets, without entering a full slow start phase again.
 <p align="center">
-<img src="https://github.com/Mohta3b/CN_CHomeworks_3/assets/86144768/bfe92d5b-7c51-4747-a30e-cf0a640c81f3">
+<img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/82197857-dcff-4300-87e3-e13355945a99">
 </p>
 
-#### Show Topology
-```show``` command is used to show the topology. It takes no arguments. 
-```text
-show
-```
 
-Sample output:
-<p align="center">
-<img src="https://github.com/Mohta3b/CN_CHomeworks_3/assets/86144768/c03f075a-1aa6-425b-86ef-00cce8753dfd">
-</p>
 
-### Protocols
-By running the following commands, you can run a protocol and show the routing table.
-
-#### Border Gateway
-```bgp``` command is used to run Border Gateway Protocol. It takes no arguments. 
-```text
-bgp
-```
-
-#### Link State
-```lsr``` command is used to run Link State Routing Protocol. You can specify the source node. If you don't specify the source node, it will run for all nodes. 
-```text
-lsrp <source>
-```
-
-Sample output for input '5':
-<p align="center">
-<img src="https://github.com/Mohta3b/CN_CHomeworks_3/assets/86144768/3457d9fa-4006-4675-991f-7f78b3dffbf6">
-</p>
-<p align="center">
-<img src="https://github.com/Mohta3b/CN_CHomeworks_3/assets/86144768/1842562a-3753-4242-8c2d-aa0cbcbaf2e1">
-</p>
-
-#### Distance Vector
-```dvrp``` command is used to run Distance Vector Routing Protocol. You can specify the source node. If you don't specify the source node, it will run for all nodes. 
-```text
-dvrp <source>
-```
-
-Sample output for input '5':
-<p align="center">
-<img src="https://github.com/Mohta3b/CN_CHomeworks_3/assets/86144768/94cbd7f8-96fe-42b6-b470-d067b8bb9f1d">
-</p>
-
-Sample output for all nodes:
-<p align="center">
-<img src="https://github.com/Mohta3b/CN_CHomeworks_3/assets/86144768/8805323b-f134-46a9-a475-96b2ffb1e2bc">
-</p>
-<p align="center">
-<img src="https://github.com/Mohta3b/CN_CHomeworks_3/assets/86144768/ed341ed4-f59b-4efc-bf3d-bc87b70b11c6">
-</p>
 
 
 ### How to use?
 You can run the following commands to run the program.
 ```text
 make
-./main.out
+./renosimulation.out
+./newrenosimulation.out
+./bbrsimulation.out
 ```
