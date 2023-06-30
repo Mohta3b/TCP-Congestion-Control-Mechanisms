@@ -38,7 +38,7 @@ $(BUILD_DIR)/Reno.o: $(GraphSensitivityList)
 	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/Reno.cpp -o $(BUILD_DIR)/Reno.o
 
 $(BUILD_DIR)/NewReno.o: $(GraphSensitivityList)
-$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/NewReno.cpp -o $(BUILD_DIR)/NewReno.o
+	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/NewReno.cpp -o $(BUILD_DIR)/NewReno.o
 
 $(BUILD_DIR)/BBR.o: $(GraphSensitivityList)
 	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/BBR.cpp -o $(BUILD_DIR)/BBR.o

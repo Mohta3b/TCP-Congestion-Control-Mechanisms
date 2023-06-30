@@ -1,5 +1,5 @@
 #include <iostream>
-#include "./TCPConnection.hpp"
+#include "../include/TCPConnection.hpp"
 
 TCPConnection::TCPConnection()
 {
@@ -22,6 +22,11 @@ TCPConnection::~TCPConnection()
 int TCPConnection::getCwnd()
 {
     return cwnd;
+}
+
+void TCPConnection::setRtt(long new_rtt)
+{
+    this->rtt = new_rtt; 
 }
 
 long TCPConnection::getSsthresh()

@@ -13,6 +13,7 @@ class TCPConnection {
         TCPConnection();
         TCPConnection(int cwnd, long ssthresh, long rtt);
         ~TCPConnection();
+        void setRtt(long new_rtt);
         int getCwnd();
         long getSsthresh();
         long getRtt();
