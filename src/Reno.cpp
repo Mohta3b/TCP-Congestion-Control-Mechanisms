@@ -5,6 +5,8 @@ Reno::Reno()
 {
     this->dup_ack_count = 0;
     this->dup_ack_threshold = 3;
+    this->controll_mode = Mode::SLOW_START;
+    this->next_packet_to_be_sent = 0;
 }
 
 Reno::~Reno()
@@ -40,6 +42,7 @@ void Reno::onPacketLoss()
 
 void Reno::onRTTUpdate(long new_rtt)
 {
+    this->next_packet_to_be_sent += this->getCwnd();
     this->rtt = new_rtt;
     switch (this->controll_mode)
     {
