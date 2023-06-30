@@ -8,16 +8,18 @@ class NewReno : public TCPConnection {
         int dup_ack_count;
         int dup_ack_threshold;
         int packet_loss_count_on_window;
+        long last_partial_ack_received;
+        long last_partial_ack_expected; // number of data that cause tcp reno to exit fast recovery
 
     public:
         NewReno();
         ~NewReno();
-        void onSelectiveAck(int num_of_acks);
+        void onSelectiveAck(long last_ack_sent);
         void onPacketTimeout();
         void onPacketLoss();
-        void slowStart(int num_of_acks);
+        void slowStart();
         void congestionAvoidance();
-        void fastRecoveryWithAck(int num_of_acks);
+        void fastRecoveryWithAck();
 };
 
 #endif /* __NEWRENO_H__ */

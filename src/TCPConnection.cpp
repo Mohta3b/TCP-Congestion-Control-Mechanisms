@@ -13,6 +13,8 @@ TCPConnection::TCPConnection(long cwnd, long ssthresh, long rtt)
     this->cwnd = cwnd;
     this->ssthresh = ssthresh;
     this->rtt = rtt;
+    this->controll_mode = Mode::SLOW_START;
+    this->next_packet_to_be_sent = 0;
 }
 
 TCPConnection::~TCPConnection()
@@ -44,14 +46,19 @@ Mode TCPConnection::getControllMode()
     return controll_mode;
 }
 
+long TCPConnection::getNextPacketToBeSent()
+{
+    return next_packet_to_be_sent;
+}
+
 void TCPConnection::SendData()
 {
     this->sending_rate = this->getCwnd();
-    for (int i = 0; i < sending_rate; i++)
+    for (int i = this->next_packet_to_be_sent; i < this->next_packet_to_be_sent + sending_rate ; i++)
     {
         std::cout << "Sending packet " << i << std::endl;
-    }
-    std::cout << "Sending rate: " << sending_rate << std::endl;
+    } 
+    std::cout << "Data Sent with Sending rate: " << sending_rate << std::endl;
 }
 
 void TCPConnection::printInfo()

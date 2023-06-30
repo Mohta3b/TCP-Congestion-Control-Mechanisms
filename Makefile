@@ -5,46 +5,87 @@ INCLUDE_DIR = include
 CFLAGS = -std=c++11 -I$(INCLUDE_DIR)
 LINK_FLAGS = 
 
-EXECUTABLE_FILE = simulation.out
+EXECUTABLE_FILE1 = renosimulation.out
+EXECUTABLE_FILE2 = newrenosimulation.out
+EXECUTABLE_FILE3 = bbrsimulation.out 
 
-OBJECTS = \
-	$(BUILD_DIR)/Simulation.o \
+OBJECTS1 = \
+	$(BUILD_DIR)/RenoSimulation.o \
 	$(BUILD_DIR)/TCPConnection.o \
 	$(BUILD_DIR)/Reno.o \
-	$(BUILD_DIR)/NewReno.o \
-	$(BUILD_DIR)/BBR.o
-	
 
-MainSensitivityList = \
-	$(SRC_DIR)/Simulation.cpp \
+OBJECTS2 = \
+	$(BUILD_DIR)/NewRenoSimulation.o \
+	$(BUILD_DIR)/TCPConnection.o \
+	$(BUILD_DIR)/NewReno.o \
+
+OBJECTS3 = \
+	$(BUILD_DIR)/BBRSimulation.o \
+	$(BUILD_DIR)/TCPConnection.o \
+	$(BUILD_DIR)/BBR.o
+
+
+TCPConnectionSensitivityList = \
+	$(SRC_DIR)/TCPConnection.cpp \
 	$(INCLUDE_DIR)/TCPConnection.hpp \
-	$(INCLUDE_DIR)/Reno.hpp \
-	$(INCLUDE_DIR)/NewReno.hpp \
+
+
+RenoSensitivityList = \
+	$(SRC_DIR)/RenoSimulation.cpp \
+	$(SRC_DIR)/Reno.cpp \
+	$(INCLUDE_DIR)/TCPConnection.hpp \
+	$(INCLUDE_DIR)/Reno.hpp
+
+NewRenoSensitivityList = \
+	$(SRC_DIR)/NewRenoSimulation.cpp \
+	$(SRC_DIR)/NewReno.cpp \
+	$(INCLUDE_DIR)/TCPConnection.hpp \
+	$(INCLUDE_DIR)/NewReno.hpp
+
+BBRSensitivityList = \
+	$(SRC_DIR)/BBRSimulation.cpp \
+	$(SRC_DIR)/BBR.cpp \
+	$(INCLUDE_DIR)/TCPConnection.hpp \
 	$(INCLUDE_DIR)/BBR.hpp
 
 
-all: $(BUILD_DIR) $(EXECUTABLE_FILE)
+
+
+all: $(BUILD_DIR) $(EXECUTABLE_FILE1) $(EXECUTABLE_FILE2) $(EXECUTABLE_FILE3)
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
-$(BUILD_DIR)/Simulation.o: $(MainSensitivityList)
-	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/Simulation.cpp -o $(BUILD_DIR)/Simulation.o
+$(BUILD_DIR)/RenoSimulation.o: $(RenoSensitivityList)
+	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/RenoSimulation.cpp -o $(BUILD_DIR)/RenoSimulation.o
 
-$(BUILD_DIR)/TCPConnection.o: $(NetworkSensitivityList)
+$(BUILD_DIR)/NewRenoSimulation.o: $(NewRenoSensitivityList)
+	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/NewRenoSimulation.cpp -o $(BUILD_DIR)/NewRenoSimulation.o
+
+$(BUILD_DIR)/BBRSimulation.o: $(BBRSensitivityList)
+	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/BBRSimulation.cpp -o $(BUILD_DIR)/BBRSimulation.o
+
+
+$(BUILD_DIR)/TCPConnection.o: $(TCPConnectionSensitivityList)
 	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/TCPConnection.cpp -o $(BUILD_DIR)/TCPConnection.o
 
-$(BUILD_DIR)/Reno.o: $(GraphSensitivityList)
+$(BUILD_DIR)/Reno.o: $(RenoSensitivityList)
 	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/Reno.cpp -o $(BUILD_DIR)/Reno.o
 
-$(BUILD_DIR)/NewReno.o: $(GraphSensitivityList)
+$(BUILD_DIR)/NewReno.o: $(NewRenoSensitivityList)
 	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/NewReno.cpp -o $(BUILD_DIR)/NewReno.o
 
-$(BUILD_DIR)/BBR.o: $(GraphSensitivityList)
+$(BUILD_DIR)/BBR.o: $(BBRSensitivityList)
 	$(CC) $(CFLAGS) $(LINK_FLAGS) -c $(SRC_DIR)/BBR.cpp -o $(BUILD_DIR)/BBR.o
 
-$(EXECUTABLE_FILE): $(OBJECTS)
-	$(CC) $(CFLAGS) $(LINK_FLAGS) $(OBJECTS) -o $(EXECUTABLE_FILE)
+$(EXECUTABLE_FILE1): $(OBJECTS1)
+	$(CC) $(CFLAGS) $(LINK_FLAGS) $(OBJECTS1) -o $(EXECUTABLE_FILE1)
+
+$(EXECUTABLE_FILE2): $(OBJECTS2)
+	$(CC) $(CFLAGS) $(LINK_FLAGS) $(OBJECTS2) -o $(EXECUTABLE_FILE2)
+
+$(EXECUTABLE_FILE3): $(OBJECTS3)
+	$(CC) $(CFLAGS) $(LINK_FLAGS) $(OBJECTS3) -o $(EXECUTABLE_FILE3)
 
 .PHONY: clean
 clean:

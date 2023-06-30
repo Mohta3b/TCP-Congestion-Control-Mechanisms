@@ -10,7 +10,9 @@ class TCPConnection {
         long ssthresh;
         long rtt;
         long sending_rate;
-        Mode controll_mode = Mode::SLOW_START;
+        long next_packet_to_be_sent;
+        Mode controll_mode;
+        
 
     public:
         TCPConnection();
@@ -21,6 +23,7 @@ class TCPConnection {
         long getSsthresh();
         long getRtt();
         Mode getControllMode();
+        long getNextPacketToBeSent();
         void SendData();
         void onRTTUpdate(long new_rtt);
         void printInfo();
