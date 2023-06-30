@@ -1,4 +1,7 @@
 {
     "cmake.sourceDirectory": "/home/mohta3b/UT/Network/CN_CHomeworks_4/src",
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "files.associations": {
+        "ostream": "cpp"
+    }
 }
