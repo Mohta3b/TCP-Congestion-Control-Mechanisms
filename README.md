@@ -3,15 +3,15 @@
 
 - [Protocol](#protocol)
     - [TCP Reno](#tcp-reno)
-        - [Description](#description)
-        - [Test Results](#test-results) 
+        - [Description](#reno-description)
+        - [Test Results](#reno-test-results) 
     - [TCP New Reno](#tcp-new-reno)
-        - [Description](#description)
-        - [Test Results](#test-results)
+        - [Description](#new-reno-description)
+        - [Test Results](#new-reno-test-results)
     - [BBR](#bbr)
-        - [Description](#description)
-        - [Test Results](#test-results)
-- [Questions]
+        - [Description](#bbr-description)
+        - [Test Results](#bbr-test-results)
+- [Questions](#questions)
     - [Question 1](#question-1)
     - [Question 2](#question-2)
     - [Question 3](#question-3)
@@ -26,7 +26,7 @@
 ## Protocol
 
 ### TCP Reno
-#### Description
+#### Reno Description
 TCP Reno is a widely used congestion control algorithm for the Transmission Control Protocol (TCP), which is the standard communication protocol used on the Internet. It is designed to manage network congestion and ensure reliable and efficient data transmission.
 
 TCP Reno operates by using a combination of packet loss and acknowledgment (ACK) information to adjust the sending rate of data. It employs a mechanism known as "Additive Increase, Multiplicative Decrease" (AIMD) to regulate the flow of data. Initially, TCP Reno increases its sending rate linearly until it detects packet loss or congestion through the absence of ACKs. When packet loss occurs, it interprets it as a sign of network congestion and reduces its sending rate by halving the congestion window size. This reduction prevents further congestion and allows the network to recover.
@@ -37,7 +37,7 @@ TCP Reno's adaptive nature and conservative approach make it a robust congestion
 
 In summary, TCP Reno is a congestion control algorithm for TCP that aims to maintain efficient and reliable data transmission by dynamically adjusting the sending rate based on network conditions. Its additive increase and multiplicative decrease mechanisms help prevent congestion and optimize network performance.
 
-#### Test Results
+#### Reno Test Results
 Start (Slow Start): TCP Reno's slow start is an initial phase where the sender gradually increases its transmission rate, probing the network for available bandwidth.
 <p align="center">
 <img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/c5671dbe-2442-4a70-b499-398aaaf79e77">
@@ -55,12 +55,12 @@ Fast Recovery: In the event of packet loss, TCP Reno quickly recovers by reducin
 
 
 ### TCP New Reno
-#### Description
+#### New Reno Description
 TCP New Reno is a modification of TCP Reno that improves its performance in the event of multiple packet losses. It is designed to address the problem of "retransmission ambiguity" in TCP Reno, where the sender cannot distinguish between a timeout and multiple packet losses. This ambiguity causes TCP Reno to enter a full slow start phase, which can significantly reduce network performance.
 
 TCP New Reno solves this problem by using a mechanism known as "Fast Recovery" to quickly recover from multiple packet losses. It does this by maintaining a "partial ACK" counter that tracks the number of ACKs received for the same sequence number. When the counter reaches three, TCP New Reno assumes that the receiver has received all packets up to that sequence number and retransmits the next packet. This allows TCP New Reno to recover from multiple packet losses without entering a full slow start phase.
 
-#### Test Results
+#### New Reno Test Results
 Start (Slow Start): TCP New Reno's slow start is an initial phase where the sender gradually increases its transmission rate, probing the network for available bandwidth.
 <p align="center">
 <img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/05965545-104f-406f-8f95-d05d65643dfd">
@@ -82,14 +82,14 @@ More test results is shown in the following images.
 
 
 ### BBR
-#### Description
+#### BBR Description
 BBR is a congestion control algorithm for TCP that aims to maximize network utilization and minimize queuing delay. It is designed to address the problem of "bufferbloat", where large buffers cause excessive queuing delay and reduce network performance.
 
 BBR uses a combination of packet loss and round-trip time (RTT) information to adjust the sending rate of data. It employs a mechanism known as "Model-Based Control" to regulate the flow of data. Initially, BBR increases its sending rate linearly until it detects packet loss or congestion through the absence of ACKs. When packet loss occurs, it interprets it as a sign of network congestion and reduces its sending rate by halving the congestion window size. This reduction prevents further congestion and allows the network to recover.
 
 Upon successful transmission and reception of packets, BBR gradually increases its sending rate, adding a fixed amount to the congestion window for every ACK received. This incremental increase allows BBR to probe the network for available bandwidth and maximize its utilization while avoiding congestion.
 
-#### Test Results
+#### BBR Test Results
 Initialization: BBR's initialization phase is an initial phase where the sender gradually increases its transmission rate, probing the network for available bandwidth.
 <p align="center">
 <img src="">
