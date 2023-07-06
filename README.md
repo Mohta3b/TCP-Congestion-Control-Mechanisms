@@ -77,8 +77,13 @@ Fast Recovery: In the event of packet loss, TCP New Reno quickly recovers by ret
 </p>
 
 More test results is shown in the following images.
-![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/2712b363-b3b6-4ab0-ad88-9bcaff399a69)
-![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/9da511e1-9451-4bc6-b574-c59c0033c490)
+<p align="center">
+<img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/2712b363-b3b6-4ab0-ad88-9bcaff399a69">
+</p>
+<p align="center">
+<img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/9da511e1-9451-4bc6-b574-c59c0033c490">
+</p>
+
 
 
 ### BBR
@@ -123,15 +128,25 @@ Congestion control is a mechanism used to regulate the flow of data when the net
 Flow control, on the other hand, deals with regulating the data flow between a sender and receiver to ensure that the receiver can handle the incoming data at a rate it can process. It is typically implemented at the receiving end to prevent overwhelming the receiver with data that it cannot handle. Flow control mechanisms utilize techniques like buffering, acknowledgments, and sliding window protocols to manage the rate at which data is transmitted. The goal of flow control is to maintain a balance between the sender and receiver, preventing data loss and avoiding overflow or underflow of data at the receiving end.
 
 In summary, congestion control focuses on managing network congestion by adjusting transmission rates based on network conditions, while flow control focuses on regulating the data flow between a sender and receiver to prevent overwhelming the receiver. Both mechanisms play crucial roles in optimizing network performance and ensuring reliable data transmission.
+<p align="center">
+<img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/ac079df9-27e1-46d7-a645-7886ed74ce5e">
+</p>
 
-![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/ac079df9-27e1-46d7-a645-7886ed74ce5e)
 ### Question 2
 Already described in [TCP New Reno](#tcp-new-reno) section.
-![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/19dbd152-7229-49f0-8223-a49e72e3942c)
+<p align="center">
+<img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/19dbd152-7229-49f0-8223-a49e72e3942c">
+</p>
+
 ### Question 3
 Already described in [BBR](#bbr) section.
-![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/138485ca-6201-405a-b2ee-a177d55fa602)
-![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/a6ae3c4f-0a09-4c36-8a1c-0c8cc03357da)
+<p align="center">
+<img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/138485ca-6201-405a-b2ee-a177d55fa602">
+</p>
+<p align="center">
+<img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/a6ae3c4f-0a09-4c36-8a1c-0c8cc03357da">
+</p>
+
 ### Question 4
 Reno and New Reno are traditional TCP congestion control algorithms that rely on packet loss and timeouts to detect and respond to network congestion. New Reno improves upon Reno's slow recovery by introducing a fast recovery mechanism. On the other hand, BBR is a newer algorithm that focuses on maximizing throughput and minimizing delays by estimating bandwidth and RTT. BBR's model-based approach allows it to be more aggressive in utilizing network capacity while maintaining low latency.
 
@@ -139,9 +154,13 @@ Reno and New Reno are traditional TCP congestion control algorithms that rely on
 
 ### Question 5
 It can be said that NewReno is always better than Reno, but we cannot say anything seriously about comparing BBR with Reno, and we have to consider different criteria. And in different situations, one is superior to the other and is not fixed. For example, in the following images, we can see that BBR is better than Reno in terms of throughput, but in terms of delay, Reno is better than BBR.
+<p align="center">
+<img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/990b0e2d-527c-4dc3-a9b5-609c180e9b8f">
+</p>
+<p align="center">
+<img src="https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/ebc4a031-3717-46d6-9a6d-cf02fef64513">
+</p>
 
-![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/990b0e2d-527c-4dc3-a9b5-609c180e9b8f)
-![image](https://github.com/Mohta3b/CN_CHomeworks_4/assets/86144768/ebc4a031-3717-46d6-9a6d-cf02fef64513)
 
 ### Question 6
 1. Binary Increase Congestion control (BIC): BIC is optimized for high-speed networks with 
@@ -163,10 +182,27 @@ the congestion window size and enters the slow start phase, effectively reducing
 sending rate en.wikipedia.org.
 
 ### How to use?
-You can run the following commands to run the program.
+To create the .out files, you can run the following command in your terminal:
 ```text
 make
+```
+
+To run the Reno simulation, execute the following command in the terminal:
+```shell
 ./renosimulation.out
+```
+This command runs the Reno simulation program, which simulates the behavior of the Reno congestion control algorithm.
+
+To run the New Reno simulation, use the following command:
+```shell
 ./newrenosimulation.out
+```
+This command executes the New Reno simulation program, which simulates the behavior of the New Reno congestion control algorithm.
+
+To run the BBR simulation, enter the following command:
+```shell
 ./bbrsimulation.out
 ```
+This command runs the BBR simulation program, which simulates the behavior of the BBR congestion control algorithm.
+
+Make sure to compile the corresponding source code and have the executable file (`renosimulation.out`, `newrenosimulation.out`, or `bbrsimulation.out`) in the current directory before running these commands.
